@@ -1,0 +1,26 @@
+public class Solution 
+{
+    public int LengthOfLongestSubstring(string s) 
+    {
+        int[] charfrequency = new int[256];
+        for(int i = 0 ; i< charfrequency.Length;i++)
+        {
+            charfrequency[i] = -1;
+        }
+        int slen = -1;
+        int maxlen = 0;
+        for(int i = 0 ; i< s.Length;i++)
+        {
+            if(charfrequency[s[i]] > slen)
+                slen = charfrequency[s[i]];
+            charfrequency[s[i]] = i;
+            maxlen = max(maxlen,i-slen);  
+        }
+        return maxlen;
+    }
+
+    private int max(int a, int b)
+    {
+        return a>b? a:b;
+    }
+}

@@ -1,0 +1,33 @@
+public class Solution {
+    public int Rob(int[] nums) {
+          if(nums == null)
+            return -1;
+        else if(nums.Length== 0)
+            return 0;
+        else if(nums.Length== 1)
+            return nums[0];
+        else if(nums.Length== 2)
+            return Math.Max(nums[0],nums[1]);
+        else
+            return _rob(nums);
+
+    }
+       public int _rob(int[] nums){
+            int[] startFromFirstHouse = new int[nums.Length + 1];
+        int[] startFromSecondHouse = new int[nums.Length + 1];
+        
+        startFromFirstHouse[0]  = 0;
+        startFromFirstHouse[1]  = nums[0];
+        startFromSecondHouse[0] = 0;
+        startFromSecondHouse[1] = 0;
+        
+        for (int i = 2; i <= nums.Length; i++) {
+            startFromFirstHouse[i] = Math.Max(startFromFirstHouse[i - 1], startFromFirstHouse[i - 2] + nums[i-1]);
+            startFromSecondHouse[i] = Math.Max(startFromSecondHouse[i - 1], startFromSecondHouse[i - 2] + nums[i-1]);
+        }
+        
+        return Math.Max(startFromFirstHouse[nums.Length - 1], startFromSecondHouse[nums.Length]);
+           
+       }
+           
+}

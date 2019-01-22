@@ -1,0 +1,45 @@
+public class Solution {
+    public string IntToRoman(int num) {
+         StringBuilder stringBuilder = new StringBuilder();
+        int t = 1000, y = 100;
+        int thousands = num / 1000;
+        for (int i = 0; i < thousands; i++)
+            stringBuilder.Append("M");
+        while (t != 1){
+            int temp = (num % t) / y;
+            if (temp == 4){
+                stringBuilder.Append(intToChar(y));
+                stringBuilder.Append(intToChar(5 * y));
+            }
+            else if (temp == 9){
+                stringBuilder.Append(intToChar(y));
+                stringBuilder.Append(intToChar(10 * y));
+            }
+            else if (temp >= 5){
+                stringBuilder.Append(intToChar(5 * y));
+                for (int i = 0; i < temp - 5; i++)
+                    stringBuilder.Append(intToChar(y));
+            }
+            else {
+                for (int i = 0; i < temp; i++)
+                    stringBuilder.Append(intToChar(y));
+            }
+            t /= 10;
+            y /= 10;
+        }
+        return stringBuilder.ToString();
+    }
+    public static String intToChar(int num){
+        switch (num){
+            case 1: return "I";
+            case 5: return "V";
+            case 10: return "X";
+            case 50: return "L";
+            case 100: return "C";
+            case 500: return "D";
+            case 1000: return "M";
+        }
+        return null;
+        
+    }
+}

@@ -24,3 +24,18 @@ public class Solution
         return a>b? a:b;
     }
 }
+Solution 2: Incase encoding standard is not mentioned
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        int maxlen = 0;
+        Dictionary<char,int> map = new Dictionary<char,int>();
+        for(int i = 0,j=-1; i< s.Length;i++){
+            if(map.ContainsKey(s[i])){
+                j = Math.Max(map[s[i]],j);
+            }
+            map[s[i]] = i;
+            maxlen = Math.Max(maxlen,i-j);
+        }
+        return maxlen;
+    }
+}
